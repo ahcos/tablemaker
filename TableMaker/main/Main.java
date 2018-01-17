@@ -6,8 +6,8 @@ public class Main
     {
     	FilesOrg file = new FilesOrg("C:\\Users\\FME\\Desktop\\testtext.txt", "C:\\Users\\FME\\Desktop\\lul.txt");
 
-    	file.schreiben();
-      
+//    	file.schreibenTable();
+    	file.schreibenLink();
     }
 
 }

@@ -2,7 +2,7 @@
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-import java.io.StringReader;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,8 +21,31 @@ public class FilesOrg {
     	
     }
     /**
+     * Erzeugt einen internen HTML Link nach Vorgaben des Uni Köln Typ3 Hypertext Projekts
+     * @return collection of HTML Links as String
+     */
+    private String createLink () {
+    	String a = readLineByLineJava8(fromFile);
+    	String result ="";
+    	String link = "<sup><a href=\"http://www.hypertextprojekt.phil-fak.uni-koeln.de/?id=13759#z";
+    	String linkEnd = "\" class=\"internal-link\" title=\"";
+    	String supStart = "\" rtekeep=\"1\">";
+    	String supEnd = "</a></sup>";
+    	
+    	
+    	String[] b = a.split("\\r?\\n");
+    	
+    	for (int i = 0; i < b.length; i++) {
+			result = result + link + i + linkEnd + b[i] + supStart + (i+1) + supEnd + "\r\n \r\n";
+		}
+    	
+    	return result;
+    	
+    }
+    
+    /**
      * Erzeugt eine Table nach den Vorgaben des Uni-Köln Hypertextprojekt typo3-Codes
-     * @return HTML table 
+     * @return HTML table as String
      */
     private String createTable () {
     	String a = readLineByLineJava8(fromFile); //ausgelesene Datei als String
@@ -31,7 +54,7 @@ public class FilesOrg {
     	String even = "<tr class=\"tr-even tr-";
     	String odd = "<tr class=\"tr-odd tr-";
     	String trail = "\"><td class=\"td-0\"";
-    	String zId = " id=\"z";
+    	String zId = " id=\"z"; // id zum auffinden des Objekts/für den HTML-Anchor
     	String zIdEnd = "\">";
     	String end = "</td></tr>";
     	String result ="";
@@ -42,16 +65,16 @@ public class FilesOrg {
     	for (int i = 0; i < b.length; i++) {
 			if (i == b.length - 1) { //falls man beim letzten Element ist, muss das "last" Table-Element angefügt werden
 				if (i % 2 == 0) {
-					result = result + "\n" + even + "last" + trail + zId + i + zIdEnd +  b[i] + end;
+					result = result + "\r\n \r\n" + even + "last" + trail + zId + i + zIdEnd +  b[i] + end;
 				}
 				else {
-					result = result + "\n" + odd + "last" + trail + zId + i + zIdEnd +  b[i] + end;				}
+					result = result + "\r\n \r\n" + odd + "last" + trail + zId + i + zIdEnd +  b[i] + end;				}
 			}
 			else if (i % 2 == 0) { // gerade Elemente
-				result = result + "\n" + even + i + trail + zId + i + zIdEnd +  b[i] + end;
+				result = result + "\r\n \r\n" + even + i + trail + zId + i + zIdEnd +  b[i] + end;
 			}
 			else { //ungerade Elemente
-				result = result + "\n" + odd + i + trail + zId + i + zIdEnd +  b[i] + end;
+				result = result + "\r\n \r\n" + odd + i + trail + zId + i + zIdEnd +  b[i] + end;
 			}
 //			countEntries++;
 			
@@ -61,9 +84,9 @@ public class FilesOrg {
     }
     
     /**
-     * Schreibt von der fromFile in die toFile
+     * Schreibt Table von der fromFile in die toFile
      */
-	public void schreiben () {
+	public void schreibenTable () {
 	    
 	  try (BufferedWriter writer = Files.newBufferedWriter(toFilePath)) //es wird angegeben wo rein zu schreiben ist
 	  {
@@ -72,6 +95,17 @@ public class FilesOrg {
 		e.printStackTrace();
 	  }
 	  }
+	
+	public void schreibenLink () {
+	    
+		  try (BufferedWriter writer = Files.newBufferedWriter(toFilePath)) //es wird angegeben wo rein zu schreiben ist
+		  {
+		      writer.write(createLink()); // es wird geschrieben in die angegebene File von der angegebenen File
+		  } catch (IOException e) {
+			e.printStackTrace();
+		  }
+		  }
+	
 
 	/**
 	 * Liest die angegebene Datei aus und gibt sie als String zurück
