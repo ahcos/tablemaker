@@ -1,4 +1,4 @@
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 
@@ -23,9 +23,35 @@ public class FilesOrg {
     
     private String createTable () {
     	String a = readLineByLineJava8(fromFile);
-    	StringReader r = new StringReader(a);
+    	String even = "<tr class=\"tr-even tr-";
+    	String odd = "<tr class=\"tr-odd tr-";
+    	String trail = "\"><td class=\"td-0\"";
+    	String zId = " id=\"z";
+    	String zIdEnd = "\">";
+    	String end = "</td></tr>";
+    	String result ="";
     	
-    	return a;
+    	String[] b = a.split("\\r?\\n");
+    	//int countEntries = 0;
+    	for (int i = 0; i < b.length; i++) {
+			if (i == b.length - 1) {
+				if (i % 2 == 0) {
+					result = result + "\n" + even + "last" + trail + zId + i + zIdEnd +  b[i] + end;
+				}
+				else {
+					result = result + "\n" + odd + "last" + trail + zId + i + zIdEnd +  b[i] + end;				}
+			}
+			else if (i % 2 == 0) {
+				result = result + "\n" + even + i + trail + zId + i + zIdEnd +  b[i] + end;
+			}
+			else {
+				result = result + "\n" + odd + i + trail + zId + i + zIdEnd +  b[i] + end;
+			}
+//			countEntries++;
+			
+		}
+    		
+    	return result;
     }
     
     /**
@@ -35,7 +61,7 @@ public class FilesOrg {
 	    
 	  try (BufferedWriter writer = Files.newBufferedWriter(toFilePath)) //es wird angegeben wo rein zu schreiben ist
 	  {
-	      writer.write(readLineByLineJava8(fromFile)); // es wird geschrieben in die angegebene File von der angegebenen File
+	      writer.write(createTable()); // es wird geschrieben in die angegebene File von der angegebenen File
 	  } catch (IOException e) {
 		e.printStackTrace();
 	  }
