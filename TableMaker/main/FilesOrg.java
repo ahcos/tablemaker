@@ -20,9 +20,14 @@ public class FilesOrg {
     	this.toFilePath = Paths.get(toFile);
     	
     }
-    
+    /**
+     * Erzeugt eine Table nach den Vorgaben des Uni-Köln Hypertextprojekt typo3-Codes
+     * @return HTML table 
+     */
     private String createTable () {
-    	String a = readLineByLineJava8(fromFile);
+    	String a = readLineByLineJava8(fromFile); //ausgelesene Datei als String
+    	
+    	//html code parts
     	String even = "<tr class=\"tr-even tr-";
     	String odd = "<tr class=\"tr-odd tr-";
     	String trail = "\"><td class=\"td-0\"";
@@ -31,20 +36,21 @@ public class FilesOrg {
     	String end = "</td></tr>";
     	String result ="";
     	
-    	String[] b = a.split("\\r?\\n");
+    	
+    	String[] b = a.split("\\r?\\n"); //String splitten an \n
     	//int countEntries = 0;
     	for (int i = 0; i < b.length; i++) {
-			if (i == b.length - 1) {
+			if (i == b.length - 1) { //falls man beim letzten Element ist, muss das "last" Table-Element angefügt werden
 				if (i % 2 == 0) {
 					result = result + "\n" + even + "last" + trail + zId + i + zIdEnd +  b[i] + end;
 				}
 				else {
 					result = result + "\n" + odd + "last" + trail + zId + i + zIdEnd +  b[i] + end;				}
 			}
-			else if (i % 2 == 0) {
+			else if (i % 2 == 0) { // gerade Elemente
 				result = result + "\n" + even + i + trail + zId + i + zIdEnd +  b[i] + end;
 			}
-			else {
+			else { //ungerade Elemente
 				result = result + "\n" + odd + i + trail + zId + i + zIdEnd +  b[i] + end;
 			}
 //			countEntries++;
