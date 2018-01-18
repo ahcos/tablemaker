@@ -4,7 +4,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
-
+/**
+ * {link {@link #createLink(String)} und {@link #createTable(String)} zum erzeugen der jeweiligen Files, {@link #readFile(String)} zum auslesen der Source-Datei
+ * @author FME
+ *
+ */
 public class CodeCreator {
 	
     /**
@@ -12,7 +16,7 @@ public class CodeCreator {
      * @return collection of HTML Links as String
      */
     public String createLink (String fromFile) {
-    	String a = readLineByLineJava8(fromFile);
+    	String a = readFile(fromFile);
     	String result ="";
     	String link = "<sup><a href=\"http://www.hypertextprojekt.phil-fak.uni-koeln.de/?id=13759#z";
     	String linkEnd = "\" class=\"internal-link\" title=\"";
@@ -36,7 +40,7 @@ public class CodeCreator {
      * @return HTML table as String
      */
     public String createTable (String fromFile) {
-    	String a = readLineByLineJava8(fromFile); //ausgelesene Datei als String
+    	String a = readFile(fromFile); //ausgelesene Datei als String
     	
     	//html code parts
     	String even = "<tr class=\"tr-even tr-";
@@ -76,7 +80,7 @@ public class CodeCreator {
 	 * @param fromFile
 	 * @return String mit \n
 	 */
-    private String readLineByLineJava8(String fromFile)
+    private String readFile(String fromFile)
     {
         StringBuilder contentBuilder = new StringBuilder();
  
