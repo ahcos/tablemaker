@@ -1,30 +1,17 @@
-
-import java.io.BufferedWriter;
+package tmaker;
 import java.io.IOException;
-
-
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-public class FilesOrg {
+public class CodeCreator {
 	
-	private String fromFile;
-	private Path toFilePath;
-
-
-    public FilesOrg(String fromFile, String toFile) {
-    	this.fromFile = fromFile;
-    	this.toFilePath = Paths.get(toFile);
-    	
-    }
     /**
      * Erzeugt einen internen HTML Link nach Vorgaben des Uni Köln Typ3 Hypertext Projekts
      * @return collection of HTML Links as String
      */
-    private String createLink () {
+    public String createLink (String fromFile) {
     	String a = readLineByLineJava8(fromFile);
     	String result ="";
     	String link = "<sup><a href=\"http://www.hypertextprojekt.phil-fak.uni-koeln.de/?id=13759#z";
@@ -34,11 +21,12 @@ public class FilesOrg {
     	
     	
     	String[] b = a.split("\\r?\\n");
-    	
+    	int countEntries = 0;
     	for (int i = 0; i < b.length; i++) {
 			result = result + link + i + linkEnd + b[i] + supStart + (i+1) + supEnd + "\r\n \r\n";
+			countEntries++;
 		}
-    	
+    	System.out.println(countEntries + " Links erstellt.");
     	return result;
     	
     }
@@ -47,7 +35,7 @@ public class FilesOrg {
      * Erzeugt eine Table nach den Vorgaben des Uni-Köln Hypertextprojekt typo3-Codes
      * @return HTML table as String
      */
-    private String createTable () {
+    public String createTable (String fromFile) {
     	String a = readLineByLineJava8(fromFile); //ausgelesene Datei als String
     	
     	//html code parts
@@ -61,7 +49,7 @@ public class FilesOrg {
     	
     	
     	String[] b = a.split("\\r?\\n"); //String splitten an \n
-    	//int countEntries = 0;
+    	int countEntries = 0;
     	for (int i = 0; i < b.length; i++) {
 			if (i == b.length - 1) { //falls man beim letzten Element ist, muss das "last" Table-Element angefügt werden
 				if (i % 2 == 0) {
@@ -76,37 +64,13 @@ public class FilesOrg {
 			else { //ungerade Elemente
 				result = result + "\r\n \r\n" + odd + i + trail + zId + i + zIdEnd +  b[i] + end;
 			}
-//			countEntries++;
+			countEntries++;
 			
 		}
-    		
+    	System.out.println(countEntries + " Tabelleneinträge erstellt.");
     	return result;
     }
-    
-    /**
-     * Schreibt Table von der fromFile in die toFile
-     */
-	public void schreibenTable () {
-	    
-	  try (BufferedWriter writer = Files.newBufferedWriter(toFilePath)) //es wird angegeben wo rein zu schreiben ist
-	  {
-	      writer.write(createTable()); // es wird geschrieben in die angegebene File von der angegebenen File
-	  } catch (IOException e) {
-		e.printStackTrace();
-	  }
-	  }
 	
-	public void schreibenLink () {
-	    
-		  try (BufferedWriter writer = Files.newBufferedWriter(toFilePath)) //es wird angegeben wo rein zu schreiben ist
-		  {
-		      writer.write(createLink()); // es wird geschrieben in die angegebene File von der angegebenen File
-		  } catch (IOException e) {
-			e.printStackTrace();
-		  }
-		  }
-	
-
 	/**
 	 * Liest die angegebene Datei aus und gibt sie als String zurück
 	 * @param fromFile
@@ -131,7 +95,8 @@ public class FilesOrg {
  
         return contentBuilder.toString();
     }
-
-
 	
+	
+	
+
 }
