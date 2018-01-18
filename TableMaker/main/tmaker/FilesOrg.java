@@ -62,17 +62,19 @@ public class FilesOrg {
     	c.check(fromFile, toFile);
     	
     	if (c.isFromFileExists() && c.isToFileExists()) { //sofern beide Dateien existieren und im korrekten Zustand sind
-    		if (type == 'L')
+    		if (type == 'l')
     			schreibenLink();
-    		else if (type == 'T')
+    		else if (type == 't')
     			schreibenTable();
     		else {
     			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     			System.out.println("\'L\' für Linksammlung, \'T\' für Table! Neue Eingabe oder \'Q\', um das Programm zu beenden.");
     			char[] input = br.readLine().toCharArray(); // Userinput wird auf ein Array abgelegt, dieses folgend ausgelesen
     			br.close();
-    			if (input[0] == 'q' && input.length == 1)
-    				System.exit(-1);
+    		
+    			input[0] = Character.toLowerCase(input[0]);
+    			if ((input[0] == 'q') && input.length == 1)
+    				System.exit(0);
     			else if (input.length > 1) { // user gibt mehr als ein Zeichen ein
     				System.out.println("Ein Komiker! Programm wird beendet.");
     				System.exit(-1);
@@ -85,6 +87,10 @@ public class FilesOrg {
     	else if (!c.isFromFileExists()) { //alter Quelldateipfad ungültig, neuer Pfad wird aufgerufen, dann go() rekursiv
     		this.fromFile = c.getNewFromFile(); 
     		go(type);
+    	}
+    	else {
+    		System.out.println("Unbekannter Fehler - Dateipfade korrekt?");
+    		System.exit(-1);
     	}
     	
     }

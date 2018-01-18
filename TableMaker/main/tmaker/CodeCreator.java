@@ -16,6 +16,8 @@ public class CodeCreator {
      * @return collection of HTML Links as String
      */
     public String createLink (String fromFile) {
+    	System.out.println("Linksammlung wird erstellt...");
+    	
     	String a = readFile(fromFile);
     	String result ="";
     	String link = "<sup><a href=\"http://www.hypertextprojekt.phil-fak.uni-koeln.de/?id=13759#z";
@@ -40,6 +42,8 @@ public class CodeCreator {
      * @return HTML table as String
      */
     public String createTable (String fromFile) {
+    	
+    	System.out.println("Tabelle wird erstellt...");
     	String a = readFile(fromFile); //ausgelesene Datei als String
     	
     	//html code parts

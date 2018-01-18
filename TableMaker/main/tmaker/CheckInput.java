@@ -52,7 +52,7 @@ public class CheckInput {
     		}
     		else { //fromFile existiert, aber ist leer
     			br.close();
-    			System.out.println("Quelldatei leer - neuen Dateinamen angeben oder \"Q\" um Programm zu beenden.");
+    			System.out.println("Quelldatei leer - neuen Dateipfad angeben oder \"Q\" um Programm zu beenden.");
         		BufferedReader breader = new BufferedReader(new InputStreamReader(System.in));
         		String temp = breader.readLine().toString().toLowerCase();
         		if (temp == "q") {
@@ -67,10 +67,10 @@ public class CheckInput {
     		}
     	}
     	else { //fromFile existiert nicht
-    		System.out.println("Keine Quelldatei vorhanden - neuen Dateinamen angeben oder \"Q\" um Programm zu beenden.");
+    		System.out.println("Keine Quelldatei vorhanden - neuen Dateipfad angeben oder \"Q\" um Programm zu beenden.");
     		BufferedReader breader = new BufferedReader(new InputStreamReader(System.in));
     		String temp = breader.readLine().toString().toLowerCase();
-    		if (temp == "q") {
+    		if (temp == "q" || temp == "Q") {
     			System.exit(-1);
     		}
     		else {
