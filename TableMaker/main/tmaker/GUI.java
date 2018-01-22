@@ -1,6 +1,9 @@
 package tmaker;
 
+
+
 import javafx.application.Application;
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 
 public class GUI extends Application {
 	
@@ -27,38 +31,35 @@ public class GUI extends Application {
 		textSource.setText("Quelltext");
 		textTarget.setText("Ergebnis");
 		
-		Text sourceName = new Text(); // Name der Quelldatei
-    	Text targetName = new Text(); // Name der Zieldatei
+		Text sourceName = new Text("Keine Datei gewählt."); // Name der Quelldatei
+    	Text targetName = new Text("Keine Datei gewählt."); // Name der Zieldatei
 		
 		
 		text.setFont(new Font(20)); 
 		
 		text.setText("Tablemaker 1.0 \n\nQuell- und Zieldatei auswählen \noder Text direkt im Feld eingeben.");
 		
-		TMButton b = new TMButton(); // neues Element der Klasse in der das Button-Handling abläuft
-		String getSourceName = b.getSourceName();
-		String getTargetName = b.getTargetName();
+		ButtonFactory b = new ButtonFactory(primaryStage); // neues Element der Klasse in der das Button-Handling abläuft
+		
 
         /*
          * Erstellung der verschiedenen Buttons
          */
 		
-        final Button openSourceButton = b.getSourceButton(primaryStage);
-        final Button openTargetButton = b.getTargetButton(primaryStage);
-        final Button clearSource = b.getClearSourceButton(primaryStage);
-        final Button clearTarget = b.getClearTargetButton(primaryStage);
-        final Button createLinkButton = b.getGenerateLink();
-        final Button createTableButton = b.getGenerateTable();
+        final Button openSourceButton = b.openSourceButton(sourceName, "Quelldatei wählen...");
+        final Button openTargetButton = b.openSourceButton(targetName, "Zieldatei wählen...");
+        final Button clearSource = b.clearSource("Clear", sourceName);
+        final Button clearTarget = b.clearTarget("Clear", targetName);
+      
+        final Button createLinkButton = b.makeLinkButton("Links erstellen", textSource, textTarget);
+        final Button createTableButton = b.makeTableButton("Table erstellen", textSource, textTarget);
 
-    	sourceName.setText(getSourceName); // FUNKTIONIERT NOCH NICHT
-    	targetName.setText(getTargetName);
-    	
 		/*
 		 * GridPane welches die Elemente hält
 		 * HBox hält die nebeneinander angeordneten Buttons
 		 */
     	
-    	
+  
     	
     	
 		final GridPane inputGridPane = new GridPane();
@@ -98,7 +99,8 @@ public class GUI extends Application {
         primaryStage.setTitle("TableMaker 1.0"); // Programmleiste
         primaryStage.setScene(new Scene(rootGroup));
         
-  
+        
+        primaryStage.show();
 		
 	}
         	

@@ -5,6 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Klasse überflüssig geworden in 1.0
+ * @author FME
+ *
+ */
+
 public class CheckInput {
 	
 	private boolean fromFileExists;

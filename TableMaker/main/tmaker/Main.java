@@ -1,6 +1,14 @@
 package tmaker;
 import java.io.IOException;
 
+/**
+ * Alter Einstiegspunkt fürs Programm
+ * 
+ * @author FME
+ *
+ */
+
+
 public class Main
 {
     public static void main(String[] args) throws IOException 
@@ -14,7 +22,7 @@ public class Main
     	
     	FilesOrg file1 = new FilesOrg(sourceFile, targetFile);
     	
-    	file1.go('p');
+    	file1.go('p', null, null);
     	
     }
 
