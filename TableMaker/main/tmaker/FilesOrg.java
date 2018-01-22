@@ -133,6 +133,7 @@ public class FilesOrg {
     private String readFile(String fromFile)
     {
         StringBuilder contentBuilder = new StringBuilder();
+        
  
         try (Stream<String> stream = Files.lines( Paths.get(fromFile), StandardCharsets.ISO_8859_1)) // charset nicht utf-8, klappt nicht!
         {

@@ -75,7 +75,7 @@ public class ButtonFactory {
         		new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(final ActionEvent e) {
-                    	if (!(sourceString == "" && targetString == "")) {
+                    	if (!(sourceString.equals("")  && targetString.equals(""))) {
 	                    	try {
 								file1.go('l', null, null);
 							} catch (IOException e1) {
