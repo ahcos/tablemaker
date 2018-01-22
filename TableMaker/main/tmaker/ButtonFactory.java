@@ -102,7 +102,7 @@ public class ButtonFactory {
      * @return Source File Button
      */
 
-	public Button openSourceButton (Text text, String name) {
+	public Button openSourceButton (String name, Text text) {
     	Button b = new Button(name);
     	FileChooser fileChooser = new FileChooser();
 		b.setOnAction(
@@ -120,13 +120,13 @@ public class ButtonFactory {
     }
 	/**
 	 * Erstellt einen "Quelldatei"-Button
-	 * @param text
 	 * @param name
+	 * @param text
 	 * @param Stage primaryStage
 	 * @return Target File Button
 	 */
 
-	public Button openTargetButton (Text text, String name){
+	public Button openTargetButton (String name, Text text){
     	Button b = new Button(name);
     	FileChooser fileChooser = new FileChooser();
 		b.setOnAction(
@@ -143,7 +143,7 @@ public class ButtonFactory {
     	return b;
 	}
 	
-	public Button clearSource (String name, Text text) {
+	public Button clearSourceButton (String name, Text text) {
 		Button b = new Button(name);
 		b.setOnAction(
 	            new EventHandler<ActionEvent>() {
@@ -159,7 +159,7 @@ public class ButtonFactory {
 		return b;
 	}
 	
-	public Button clearTarget (String name, Text text) {
+	public Button clearTargetButton (String name, Text text) {
 		Button b = new Button(name);
 		b.setOnAction(
 	            new EventHandler<ActionEvent>() {

@@ -46,10 +46,10 @@ public class GUI extends Application {
          * Erstellung der verschiedenen Buttons
          */
 		
-        final Button openSourceButton = b.openSourceButton(sourceName, "Quelldatei wählen...");
-        final Button openTargetButton = b.openSourceButton(targetName, "Zieldatei wählen...");
-        final Button clearSource = b.clearSource("Clear", sourceName);
-        final Button clearTarget = b.clearTarget("Clear", targetName);
+        final Button openSourceButton = b.openSourceButton("Quelldatei wählen...", sourceName);
+        final Button openTargetButton = b.openSourceButton("Zieldatei wählen...", targetName);
+        final Button clearSourceButton = b.clearSourceButton("Clear", sourceName);
+        final Button clearTargetButton = b.clearTargetButton("Clear", targetName);
       
         final Button createLinkButton = b.makeLinkButton("Links erstellen", textSource, textTarget);
         final Button createTableButton = b.makeTableButton("Table erstellen", textSource, textTarget);
@@ -71,10 +71,10 @@ public class GUI extends Application {
 		HBox createButtons = new HBox();
 		
 		sourceButtons.getChildren().add(openSourceButton);
-		sourceButtons.getChildren().add(clearSource);
+		sourceButtons.getChildren().add(clearSourceButton);
 		
 		targetButtons.getChildren().add(openTargetButton);
-		targetButtons.getChildren().add(clearTarget);
+		targetButtons.getChildren().add(clearTargetButton);
 		
 		createButtons.getChildren().addAll(createTableButton, createLinkButton);
 	    
